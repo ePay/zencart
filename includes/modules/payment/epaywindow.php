@@ -79,9 +79,9 @@ class epaywindow
 	
 	function process_button()
 	{
-		global $customer_id, $order, $currencies, $currency, $languages_id, $language, $cart, $db;
+		global $customer_id, $order, $currencies, $currency, $cart, $db;
 		
-		switch(strtolower($language))
+		switch(strtolower($_SESSION['language']))
 		{
 			case 'danish':
 			case 'dansk':
