@@ -114,11 +114,14 @@ class epaywindow
 		
 		$order_id = $_SESSION['cartID'];
 		
+		$decimals = $currencies->get_decimal_places($order->info['currency']);
+		$total = (isset($order->info['currency_value'])) ? ($order->info['total'] * $order->info['currency_value']) : $order->info['total'];
+		
 		$params = array
 		(
 			'merchantnumber' => MODULE_PAYMENT_EPAYWINDOW_SHOPID,
 			'orderid' => $order_id,
-			'amount' => (100 * $order->info["total"]),
+			'amount' => (100 * zen_round($total, $decimals)),
 			'currency' => $order->info["currency"],
 			'accepturl' => zen_href_link('ext/modules/payment/epay/accept.php', 'accepturl=' . urlencode(zen_href_link(FILENAME_CHECKOUT_SUCCESS, 'SSL')), 'SSL', true, true, true),
 			'callbackurl' => zen_href_link('ext/modules/payment/epay/callback.php', 'customerid=' . $_SESSION["customer_id"], 'SSL', true, true, true),
