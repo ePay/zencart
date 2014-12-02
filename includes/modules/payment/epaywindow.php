@@ -165,13 +165,13 @@ class epaywindow
 
 			foreach ($params as $key => $value)
 			{
-			    if($key != "secretkey" && $key != "main_page")
+			    if($key != "secrethash" && $key != "main_page")
 			    	$var .= $value;
 			}
 
 			$genstamp = md5($var . MODULE_PAYMENT_EPAYWINDOW_MD5WORD);
 
-			if($genstamp != $_GET["secretkey"])
+			if($genstamp != $_GET["secrethash"])
 			{
 			    echo "Hash is not valid";
 			    exit();
