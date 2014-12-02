@@ -165,7 +165,7 @@ class epaywindow
 
 			foreach ($params as $key => $value)
 			{
-			    if($key != "secretkey")
+			    if($key != "secretkey" && $key != "main_page")
 			    	$var .= $value;
 			}
 
