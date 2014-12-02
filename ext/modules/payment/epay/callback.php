@@ -1,10 +1,18 @@
 <?php
-//Change get-parameters to avoid zen cart redirect
-$_GET["secrethash"] = $_GET["hash"];
-unset($_GET["hash"]);
 
-$_GET["epaycurrency"] = $_GET["currency"];
-unset($_GET["currency"]);
+function replace_key($array, $old_key, $new_key) {
+    $keys = array_keys($array);
+    if (false === $index = array_search($old_key, $keys)) {
+        throw new Exception(sprintf('Key "%s" does not exit', $old_key));
+    }
+    $keys[$index] = $new_key;
+    return array_combine($keys, array_values($array));
+}
+
+//Change get-parameters to avoid zen cart redirect
+
+$_GET = replace_key($_GET, "currency", "epaycurrency");
+$_GET = replace_key($_GET, "hash", "secrethash");
 
 chdir('../../../../');
 require('includes/application_top.php');
